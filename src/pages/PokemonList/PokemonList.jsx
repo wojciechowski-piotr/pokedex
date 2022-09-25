@@ -5,7 +5,7 @@ import Card from './../../components/Card';
 import styles from './PokemonList.module.scss';
 
 const GET_POKEMONS = gql`
-    query MyQuery {
+    query Pokemons {
         pokemon_v2_pokemon(limit: 5) {
             id
             name
@@ -27,7 +27,7 @@ const PokemonList = () => {
     return (
         <div className={styles.container}>
             {data.pokemon_v2_pokemon.map((pokemon) => (
-                <Card infos={pokemon} key={pokemon.id} />
+                    <Card infos={pokemon} key={pokemon.id} />
             ))}
         </div>
     );
