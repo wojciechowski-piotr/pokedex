@@ -1,0 +1,9 @@
+@use './normalize';
+
+*, html {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+}

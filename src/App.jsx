@@ -3,7 +3,7 @@ import PokemonList from './pages/PokemonList';
 const App = () => {
     return (
         <div>
-            <PokemonList />
+          <PokemonList />
         </div>
     );
 };

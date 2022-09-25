@@ -1,0 +1,7 @@
+@use './../../styles/variables' as v;
+
+.container {
+    max-width: 960px;
+    background-color: v.$primary;
+    padding: 1rem;
+}
