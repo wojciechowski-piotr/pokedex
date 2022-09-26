@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 import Card from './../../components/Card';
@@ -5,12 +6,13 @@ import Card from './../../components/Card';
 import styles from './PokemonList.module.scss';
 
 const GET_POKEMONS = gql`
-    query Pokemons {
-        pokemon_v2_pokemon(limit: 5) {
+    query Pokemons($limit: Int!, $offset: Int!) {
+        pokemon: pokemon_v2_pokemon(limit: $limit, offset: $offset) {
             id
             name
-            pokemon_v2_pokemontypes {
-                pokemon_v2_type {
+            types: pokemon_v2_pokemontypes {
+                id
+                type: pokemon_v2_type {
                     name
                 }
             }
@@ -18,16 +20,28 @@ const GET_POKEMONS = gql`
     }
 `;
 
+const PAGE_SIZE = 25;
+
 const PokemonList = () => {
-    const { loading, error, data } = useQuery(GET_POKEMONS);
+    const [page, setPage] = useState(0);
+    const { loading, error, data } = useQuery(GET_POKEMONS, {
+        variables: {
+            limit: PAGE_SIZE,
+            offset: page * PAGE_SIZE,
+        },
+    });
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Something went wrong, sorry...</p>;
 
     return (
         <div className={styles.container}>
-            {data.pokemon_v2_pokemon.map((pokemon) => (
-                    <Card infos={pokemon} key={pokemon.id} />
+            <button disabled={!page} onClick={() => setPage((prev) => prev - 1)}>
+                Prev
+            </button>
+            <button onClick={() => setPage((prev) => prev + 1)}>Next</button>
+            {data.pokemon.map((pokemon) => (
+                <Card infos={pokemon} key={pokemon.id} />
             ))}
         </div>
     );
