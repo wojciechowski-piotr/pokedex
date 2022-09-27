@@ -47,6 +47,7 @@ const PokemonDetails = () => {
 
     return (
         <div>
+            {/* GO BACK BUTTON */}
             <p>{data.pokemon.id}</p>
             <h2>{data.pokemon.name}</h2>
             {data.pokemon.types.map((item) => (

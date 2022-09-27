@@ -40,12 +40,14 @@ const PokemonList = () => {
             {error && <p>Something went wrong :(</p>}
             {data && (
                 <>
-                    <button className={styles.btn} disabled={!page} onClick={() => setPage((prev) => prev - 1)}>
-                        Prev
-                    </button>
-                    <button className={styles.btn} onClick={() => setPage((prev) => prev + 1)}>
-                        Next
-                    </button>
+                    <div className={styles['pagination-container']}>
+                        <button className={styles.btn} disabled={!page} onClick={() => setPage((prev) => prev - 1)}>
+                            Prev
+                        </button>
+                        <button className={styles.btn} onClick={() => setPage((prev) => prev + 1)}>
+                            Next
+                        </button>
+                    </div>
                     {data.pokemon.map((pokemon) => (
                         <Card infos={pokemon} key={pokemon.id} />
                     ))}
