@@ -1,0 +1,102 @@
+@use './../../styles/variables' as v;
+@use './../../styles/mixins' as m;
+
+.container {
+    max-width: 960px;
+    margin: 1rem auto;
+    border: 0.5rem solid v.$yellow;
+    @include m.screen('tablet') {
+        margin: 2rem auto;
+    }
+    @include m.screen('desktop') {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+            'image head'
+            'image types'
+            'image gen'
+            'image stats'
+            'image desc';
+    }
+}
+
+.image {
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: v.$secondary-light;
+    grid-area: image;
+}
+
+.content {
+    background-color: v.$secondary-dark;
+    padding: 1rem;
+    color: v.$accent;
+    &__head {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        font-size: 1.5rem;
+        grid-area: head;
+        h2 {
+            margin: 0;
+            padding: 0;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+    }
+    &__types {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 0.25rem;
+        background-color: v.$secondary-dark2;
+        text-transform: uppercase;
+        font-weight: 700;
+        grid-area: types;
+    }
+    &__gen {
+        display: flex;
+        justify-content: center;
+        background-color: v.$secondary-dark2;
+        text-transform: uppercase;
+        grid-area: gen;
+    }
+    &__stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        grid-area: stats;
+        span {
+            background-color: v.$secondary-dark2;
+            display: block;
+            text-align: center;
+        }
+        &--head {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+    }
+    &__desc {
+        grid-area: desc;
+        .lang-buttons {
+            display: flex;
+            gap: 0.25rem;
+            a {
+                cursor: pointer;
+                img {
+                    width: 30px;
+                }
+            }
+        }
+        &--text {
+            display: grid;
+            @include m.screen('tablet') {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @include m.screen('desktop') {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+}

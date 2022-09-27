@@ -1,5 +1,6 @@
 @use './normalize';
 @use './variables' as v;
+
 *, html {
     box-sizing: border-box;
 }
@@ -7,4 +8,5 @@
 body {
     font-family: sans-serif;
     background-color: v.$primary;
+    line-height: 1.4;
 }

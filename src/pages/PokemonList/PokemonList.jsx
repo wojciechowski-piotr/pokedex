@@ -20,7 +20,7 @@ const GET_POKEMONS = gql`
     }
 `;
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 30;
 
 const PokemonList = () => {
     const [page, setPage] = useState(0);
@@ -30,9 +30,6 @@ const PokemonList = () => {
             offset: page * PAGE_SIZE,
         },
     });
-
-    // if (loading) return <p>Loading...</p>;
-    // if (error) return <p>Error...</p>;
 
     return (
         <div className={styles.container}>
