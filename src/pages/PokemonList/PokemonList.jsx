@@ -31,18 +31,26 @@ const PokemonList = () => {
         },
     });
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Something went wrong, sorry...</p>;
+    // if (loading) return <p>Loading...</p>;
+    // if (error) return <p>Error...</p>;
 
     return (
         <div className={styles.container}>
-            <button disabled={!page} onClick={() => setPage((prev) => prev - 1)}>
-                Prev
-            </button>
-            <button onClick={() => setPage((prev) => prev + 1)}>Next</button>
-            {data.pokemon.map((pokemon) => (
-                <Card infos={pokemon} key={pokemon.id} />
-            ))}
+            {loading && <p>Loading...</p>}
+            {error && <p>Something went wrong :(</p>}
+            {data && (
+                <>
+                    <button className={styles.btn} disabled={!page} onClick={() => setPage((prev) => prev - 1)}>
+                        Prev
+                    </button>
+                    <button className={styles.btn} onClick={() => setPage((prev) => prev + 1)}>
+                        Next
+                    </button>
+                    {data.pokemon.map((pokemon) => (
+                        <Card infos={pokemon} key={pokemon.id} />
+                    ))}
+                </>
+            )}
         </div>
     );
 };

@@ -1,7 +1,11 @@
-const Nav = () => {
-  return (
-    <div>Nav</div>
-  )
-}
+import Logo from './../../assets/pokemon_logo.png';
 
-export default Nav
+const Nav = () => {
+    return (
+        <div>
+            <img src={Logo} alt="Pokemon App" />
+        </div>
+    );
+};
+
+export default Nav;
