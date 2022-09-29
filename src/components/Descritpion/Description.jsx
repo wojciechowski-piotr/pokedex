@@ -24,12 +24,6 @@ const GET_DESCRIPTION = gql`
     }
 `;
 
-// Obviously prefers
-// hot places. When
-// it rains, steamis said to spout
-// from the tip of
-// its tail.
-
 const Description = ({ id }) => {
     const [langId, setLangId] = useState(9);
     const { loading, error, data } = useQuery(GET_DESCRIPTION, {
@@ -40,8 +34,6 @@ const Description = ({ id }) => {
     });
 
     const flavor_set = Array.from(new Set(data?.pokemon[0].specy.flavor.map(({ flavor_text }) => flavor_text)));
-
-    console.log(flavor_set);
 
     return (
         <div className={styles.container}>
@@ -67,7 +59,6 @@ const Description = ({ id }) => {
                     {flavor_set.slice(0, 3).map((text, index) => (
                         <p key={index}>{text.replace('\f', ' ')}</p>
                     ))}
-                    {/* <p>data</p> */}
                 </>
             )}
         </div>
