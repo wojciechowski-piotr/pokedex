@@ -9,18 +9,15 @@ import FrFlag from './../../assets/fr.svg';
 import EnFlag from './../../assets/gb.svg';
 
 const GET_DESCRIPTION = gql`
-    query PokemonById($id: Int!, $langId: Int!) {
-        pokemon: pokemon_v2_pokemon_by_pk(id: $id) {
+    query Description($id: Int!, $langId: Int!) {
+        pokemon: pokemon_v2_pokemon(where: { id: { _eq: $id } }) {
             id
-            stats: pokemon_v2_pokemonstats {
-                stat: pokemon_v2_stat {
-                    char: pokemon_v2_characteristics {
-                        charDesc: pokemon_v2_characteristicdescriptions(where: { language_id: { _eq: $langId } }) {
-                            id
-                            description
-                            language_id
-                        }
-                    }
+            name
+            specy: pokemon_v2_pokemonspecy {
+                flavor: pokemon_v2_pokemonspeciesflavortexts(where: { language_id: { _eq: $langId } }) {
+                    id
+                    language_id
+                    flavor_text
                 }
             }
         }
@@ -36,10 +33,12 @@ const Description = ({ id }) => {
         },
     });
 
+    const flavor_set = Array.from(new Set(data?.pokemon[0].specy.flavor.map(({ flavor_text }) => flavor_text)));
+
+    console.log(flavor_set);
+
     return (
         <div className={styles.container}>
-            {loading && <p>Loading...</p>}
-            {error && <p>Something went wrong...</p>}
             <h3>Description</h3>
             <div className={styles.flags}>
                 <a onClick={() => setLangId(9)}>
@@ -55,13 +54,14 @@ const Description = ({ id }) => {
                     <img src={EsFlag} alt="Spanish" />
                 </a>
             </div>
+            {loading && <p>Loading...</p>}
+            {error && <p>Something went wrong...</p>}
             {data && (
                 <>
-                    <div>
-                        {data.pokemon.stats.map((item) =>
-                            item.stat.char.map((item) => item.charDesc.map((item) => <p key={item.id}>{item.description}</p>))
-                        )}
-                    </div>
+                    {flavor_set.map((text, index) => (
+                        <p key={index}>{text}</p>
+                    ))}
+                    {/* <p>data</p> */}
                 </>
             )}
         </div>
