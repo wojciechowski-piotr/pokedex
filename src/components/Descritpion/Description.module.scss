@@ -1,0 +1,16 @@
+.container {
+    padding: 1rem;
+}
+
+.flags {
+    a {
+        margin-right: .5rem;
+        &:last-child {
+            margin-right: 0;
+        }
+        cursor: pointer;
+        img {
+            max-width: 40px;
+        }
+    }
+}

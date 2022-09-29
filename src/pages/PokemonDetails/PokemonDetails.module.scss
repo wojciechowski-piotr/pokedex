@@ -77,26 +77,4 @@
             text-transform: uppercase;
         }
     }
-    &__desc {
-        grid-area: desc;
-        .lang-buttons {
-            display: flex;
-            gap: 0.25rem;
-            a {
-                cursor: pointer;
-                img {
-                    width: 30px;
-                }
-            }
-        }
-        &--text {
-            display: grid;
-            @include m.screen('tablet') {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            @include m.screen('desktop') {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    }
 }
