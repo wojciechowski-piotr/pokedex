@@ -15,7 +15,7 @@
             'image head'
             'image types'
             'image gen'
-            'image stats'
+            'image stats';
     }
 }
 
@@ -24,6 +24,9 @@
     flex-flow: column nowrap;
     background-color: v.$secondary-light;
     grid-area: image;
+    img {
+        max-width: 100%;
+    }
 }
 
 .content {

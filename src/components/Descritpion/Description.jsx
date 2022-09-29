@@ -24,6 +24,12 @@ const GET_DESCRIPTION = gql`
     }
 `;
 
+// Obviously prefers
+// hot places. When
+// it rains, steamis said to spout
+// from the tip of
+// its tail.
+
 const Description = ({ id }) => {
     const [langId, setLangId] = useState(9);
     const { loading, error, data } = useQuery(GET_DESCRIPTION, {
@@ -58,8 +64,8 @@ const Description = ({ id }) => {
             {error && <p>Something went wrong...</p>}
             {data && (
                 <>
-                    {flavor_set.map((text, index) => (
-                        <p key={index}>{text}</p>
+                    {flavor_set.slice(0, 3).map((text, index) => (
+                        <p key={index}>{text.replace('\f', ' ')}</p>
                     ))}
                     {/* <p>data</p> */}
                 </>
