@@ -17,6 +17,11 @@ const GET_POKEMONS = gql`
                 }
             }
         }
+        pokemonAgg: pokemon_v2_pokemon_aggregate {
+            aggregate {
+                count(columns: id)
+            }
+        }
     }
 `;
 
@@ -41,7 +46,11 @@ const PokemonList = () => {
                         <button className={styles.btn} disabled={!page} onClick={() => setPage((prev) => prev - 1)}>
                             Prev
                         </button>
-                        <button className={styles.btn} onClick={() => setPage((prev) => prev + 1)}>
+                        <button
+                            className={styles.btn}
+                            disabled={(data.pokemonAgg.aggregate.count / PAGE_SIZE) - 1 <= page}
+                            onClick={() => setPage((prev) => prev + 1)}
+                        >
                             Next
                         </button>
                     </div>
