@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 import Card from './../../components/Card';
+import PageContext from '../../contexts/PageContext';
 
 import styles from './PokemonList.module.scss';
 
@@ -28,7 +29,8 @@ const GET_POKEMONS = gql`
 const PAGE_SIZE = 30;
 
 const PokemonList = () => {
-    const [page, setPage] = useState(0);
+    // const [page, setPage] = useState(0);
+    const { page, setPage } = useContext(PageContext);
     const { loading, error, data } = useQuery(GET_POKEMONS, {
         variables: {
             limit: PAGE_SIZE,
@@ -48,7 +50,7 @@ const PokemonList = () => {
                         </button>
                         <button
                             className={styles.btn}
-                            disabled={(data.pokemonAgg.aggregate.count / PAGE_SIZE) - 1 <= page}
+                            disabled={data.pokemonAgg.aggregate.count / PAGE_SIZE - 1 <= page}
                             onClick={() => setPage((prev) => prev + 1)}
                         >
                             Next
